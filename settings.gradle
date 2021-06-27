@@ -1,2 +1,5 @@
 rootProject.name = "tutu_assigment"
 include ':app'
+include ':app:domain'
+include ':app:data'
+include ':app:presentation'
