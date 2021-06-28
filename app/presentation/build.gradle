@@ -37,4 +37,5 @@ dependencies {
     implementation dataDependencies.kotlin
     implementation appDependencies.androidCore
     implementation appDependencies.appCompat
+    implementation appDependencies.constraintLayout
 }
