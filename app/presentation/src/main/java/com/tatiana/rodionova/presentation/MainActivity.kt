@@ -1,4 +1,4 @@
-package com.tatiana.rodionova.tutu_assigment
+package com.tatiana.rodionova.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
