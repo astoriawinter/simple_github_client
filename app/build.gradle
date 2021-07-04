@@ -35,11 +35,16 @@ android {
 
 dependencies {
 
-    implementation project(":app:domain")
     implementation project(":app:data")
+    implementation project(":app:domain")
     implementation project(":app:presentation")
     implementation dataDependencies.kotlin
-    implementation appDependencies.material
     implementation appDependencies.dagger
     kapt appDependencies.daggerCompiler
+    implementation appDependencies.daggerAndroid
+    implementation appDependencies.daggerAndroidSupport
+    kapt appDependencies.daggerAndroidProcessor
+    implementation dataDependencies.gson
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.gsonConvertor
 }

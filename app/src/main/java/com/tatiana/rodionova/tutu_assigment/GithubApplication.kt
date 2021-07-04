@@ -1,15 +1,11 @@
 package com.tatiana.rodionova.tutu_assigment
 
-import android.app.Application
 import com.tatiana.rodionova.tutu_assigment.di.DaggerGithubComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class GithubApplication : Application() {
+class GithubApplication : DaggerApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
-
-        DaggerGithubComponent
-            .factory()
-            .create(applicationContext)
-    }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerGithubComponent.factory().create(applicationContext)
 }

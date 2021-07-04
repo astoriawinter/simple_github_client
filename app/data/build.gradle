@@ -34,5 +34,8 @@ android {
 
 dependencies {
 
+    implementation project(":app:domain")
     implementation dataDependencies.kotlin
+    implementation dataDependencies.coroutinesCore
+    implementation dataDependencies.retrofit
 }
