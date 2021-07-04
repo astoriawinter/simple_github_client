@@ -1,11 +1,16 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         minSdkVersion 22
@@ -34,8 +39,18 @@ android {
 
 dependencies {
 
+    implementation project(":app:data")
+    implementation project(":app:domain")
+    implementation appDependencies.material
     implementation dataDependencies.kotlin
     implementation appDependencies.androidCore
     implementation appDependencies.appCompat
     implementation appDependencies.constraintLayout
+    implementation appDependencies.navFragment
+    implementation appDependencies.recyclerview
+    implementation appDependencies.dagger
+    kapt appDependencies.daggerCompiler
+    implementation appDependencies.daggerAndroid
+    implementation appDependencies.daggerAndroidSupport
+    kapt appDependencies.daggerAndroidProcessor
 }
