@@ -35,4 +35,5 @@ android {
 dependencies {
 
     implementation dataDependencies.kotlin
+    implementation dataDependencies.coroutinesCore
 }
