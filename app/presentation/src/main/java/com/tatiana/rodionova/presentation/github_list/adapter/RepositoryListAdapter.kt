@@ -7,23 +7,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tatiana.rodionova.domain.model.GithubRepositoryDomainItem
+import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.presentation.databinding.ItemRepositoryListBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.properties.Delegates
 
-class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListViewHolder>() {
+class RepositoryListAdapter(
+    private val clickListener: (GithubRepositoryListDomainItem) -> (Unit)
+) : RecyclerView.Adapter<RepositoryListViewHolder>() {
 
-    var githubItemList: List<GithubRepositoryDomainItem> by Delegates.observable(listOf()) { _, _, list ->
+    var githubItemList: List<GithubRepositoryListDomainItem> by Delegates.observable(listOf()) { _, _, list ->
         differ.submitList(list)
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<GithubRepositoryDomainItem>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<GithubRepositoryListDomainItem>() {
 
         override fun areContentsTheSame(
-            oldItem: GithubRepositoryDomainItem,
-            newItem: GithubRepositoryDomainItem
+            oldItem: GithubRepositoryListDomainItem,
+            newItem: GithubRepositoryListDomainItem
         ): Boolean =
             oldItem.stargazers_count == newItem.stargazers_count
                     && oldItem.updated_at == newItem.updated_at
@@ -31,8 +33,8 @@ class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListViewHolder>() {
                     && oldItem.language == newItem.language
 
         override fun areItemsTheSame(
-            oldItem: GithubRepositoryDomainItem,
-            newItem: GithubRepositoryDomainItem
+            oldItem: GithubRepositoryListDomainItem,
+            newItem: GithubRepositoryListDomainItem
         ): Boolean =
             oldItem.name == newItem.name
     }
@@ -46,7 +48,12 @@ class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: RepositoryListViewHolder, position: Int) {
-        holder.bind(githubItemList[position])
+        val item = githubItemList[position]
+
+        holder.itemView.setOnClickListener {
+            clickListener(item)
+        }
+        holder.bind(item)
     }
 
     override fun getItemCount() = githubItemList.size
@@ -58,7 +65,7 @@ class RepositoryListViewHolder(
     private val iso8061 = SimpleDateFormat(ISO_8061_FORMAT, Locale.getDefault())
     private val yearMonthDay = SimpleDateFormat(YEAR_MONTH_DAY_FORMAT, Locale.getDefault())
 
-    fun bind(item: GithubRepositoryDomainItem) {
+    fun bind(item: GithubRepositoryListDomainItem) {
         with(binding) {
             name.text = item.name
             item.description.run {
