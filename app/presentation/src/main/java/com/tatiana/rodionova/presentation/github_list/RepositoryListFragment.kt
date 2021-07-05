@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tatiana.rodionova.data.model.GithubItem
-import com.tatiana.rodionova.domain.model.GithubRepositoryDomainItem
+import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.presentation.R
 import com.tatiana.rodionova.presentation.databinding.FragmentRepositoryListBinding
 import com.tatiana.rodionova.presentation.github_list.adapter.RepositoryListAdapter
@@ -62,7 +62,7 @@ class RepositoryListFragment : DaggerAppCompatDialogFragment() {
         viewBinding?.loader?.visibility = View.VISIBLE
     }
 
-    private fun renderLoadedData(githubItemList: List<GithubRepositoryDomainItem>) {
+    private fun renderLoadedData(githubItemList: List<GithubRepositoryListDomainItem>) {
         viewBinding?.loader?.visibility = View.GONE
         repositoryListAdapter?.githubItemList = githubItemList
     }
@@ -72,10 +72,15 @@ class RepositoryListFragment : DaggerAppCompatDialogFragment() {
         viewBinding?.loader?.visibility = View.GONE
     }
 
+    private fun openDetailedScreen(item: GithubRepositoryListDomainItem) {
+        val action = RepositoryListFragmentDirections.goToDetailedScreen(item)
+        findNavController(this).navigate(action)
+    }
+
     private fun initRecyclerView() {
         viewBinding?.repositories?.run {
             layoutManager = LinearLayoutManager(context)
-            RepositoryListAdapter().run {
+            RepositoryListAdapter(::openDetailedScreen).run {
                 adapter = this
                 addItemDecoration(
                     OffsetDividerItemDecoration(

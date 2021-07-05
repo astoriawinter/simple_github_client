@@ -1,11 +1,11 @@
 package com.tatiana.rodionova.domain.usecase
 
-import com.tatiana.rodionova.domain.model.GithubRepositoryDomainItem
-import com.tatiana.rodionova.domain.repository.GithubRepository
+import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
+import com.tatiana.rodionova.domain.repository.GithubListRepository
 import kotlinx.coroutines.flow.Flow
 
-class FetchGithubRepositoryListUseCase(private val githubRepository: GithubRepository) {
+class FetchGithubRepositoryListUseCase(private val githubRepository: GithubListRepository) {
 
-    suspend operator fun invoke(): Flow<List<GithubRepositoryDomainItem>> =
+    suspend operator fun invoke(): Flow<List<GithubRepositoryListDomainItem>> =
         githubRepository.getGithubAndroidRepositories()
 }

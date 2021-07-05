@@ -38,4 +38,5 @@ dependencies {
     implementation dataDependencies.kotlin
     implementation dataDependencies.coroutinesCore
     implementation dataDependencies.retrofit
+    implementation dataDependencies.gson
 }

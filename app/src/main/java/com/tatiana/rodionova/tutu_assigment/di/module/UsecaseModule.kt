@@ -1,7 +1,9 @@
 package com.tatiana.rodionova.tutu_assigment.di.module
 
-import com.tatiana.rodionova.domain.repository.GithubRepository
+import com.tatiana.rodionova.domain.repository.GithubDetailedRepository
+import com.tatiana.rodionova.domain.repository.GithubListRepository
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryListUseCase
+import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryTreeUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -9,8 +11,15 @@ import dagger.Provides
 class UsecaseModule {
     @Provides
     fun providesFetchGithubRepositoryListUseCase(
-        githubRepository: GithubRepository
+        githubRepository: GithubListRepository
     ): FetchGithubRepositoryListUseCase {
         return FetchGithubRepositoryListUseCase(githubRepository)
+    }
+
+    @Provides
+    fun providesFetchGithubRepositoryTreeUseCase(
+        githubRepository: GithubDetailedRepository
+    ): FetchGithubRepositoryTreeUseCase {
+        return FetchGithubRepositoryTreeUseCase(githubRepository)
     }
 }

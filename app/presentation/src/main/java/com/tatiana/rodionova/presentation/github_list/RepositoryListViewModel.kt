@@ -2,7 +2,7 @@ package com.tatiana.rodionova.presentation.github_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tatiana.rodionova.domain.model.GithubRepositoryDomainItem
+import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,7 @@ class RepositoryListViewModel @Inject constructor(
     sealed interface State {
         object Loading : State
         data class Error(val error: Throwable) : State
-        data class DataLoaded(val githubItemList: List<GithubRepositoryDomainItem>) : State
+        data class DataLoaded(val githubItemList: List<GithubRepositoryListDomainItem>) : State
     }
 
     init {

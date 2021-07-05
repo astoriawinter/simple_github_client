@@ -2,6 +2,7 @@ package com.tatiana.rodionova.tutu_assigment.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.tatiana.rodionova.presentation.github_detailed.RepositoryDetailedViewModel
 import com.tatiana.rodionova.presentation.github_list.RepositoryListViewModel
 import com.tatiana.rodionova.tutu_assigment.di.ViewModelFactory
 import com.tatiana.rodionova.tutu_assigment.di.qualifier.ViewModelKey
@@ -17,5 +18,10 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(RepositoryListViewModel::class)
-    abstract fun bindViewModel(viewModel: RepositoryListViewModel): ViewModel
+    abstract fun bindListViewModel(viewModel: RepositoryListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RepositoryDetailedViewModel::class)
+    abstract fun bindDetailedViewModel(viewModel: RepositoryDetailedViewModel): ViewModel
 }
