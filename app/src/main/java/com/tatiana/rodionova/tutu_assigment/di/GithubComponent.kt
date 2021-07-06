@@ -2,6 +2,7 @@ package com.tatiana.rodionova.tutu_assigment.di
 
 import android.content.Context
 import com.tatiana.rodionova.tutu_assigment.GithubApplication
+import com.tatiana.rodionova.tutu_assigment.di.module.DatabaseModule
 import com.tatiana.rodionova.tutu_assigment.di.module.FragmentViewBindingModule
 import com.tatiana.rodionova.tutu_assigment.di.module.NetworkModule
 import com.tatiana.rodionova.tutu_assigment.di.module.UsecaseModule
@@ -18,6 +19,7 @@ import javax.inject.Singleton
         NetworkModule::class,
         UsecaseModule::class,
         FragmentViewBindingModule::class,
+        DatabaseModule::class
     ]
 )
 
