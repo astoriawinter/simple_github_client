@@ -9,6 +9,9 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+        buildConfigField("String","LOGIN", LOGIN)
+        buildConfigField("String","TOKEN", TOKEN)
+
         applicationId "com.tatiana.rodionova.tutu_assigment"
         minSdkVersion 22
         targetSdkVersion 30
@@ -47,4 +50,7 @@ dependencies {
     implementation dataDependencies.gson
     implementation dataDependencies.retrofit
     implementation dataDependencies.gsonConvertor
+    api dataDependencies.roomRuntime
+    kapt dataDependencies.roomCompiler
+    api dataDependencies.roomKtx
 }

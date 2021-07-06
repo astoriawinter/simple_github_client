@@ -14,3 +14,6 @@ class GithubRepositoryListDomainItem(
 
 fun String.getNameAndRepository() =
     split("/")
+
+fun getFullRepositoryName(name: String, repo: String) =
+    "$name/$repo"
