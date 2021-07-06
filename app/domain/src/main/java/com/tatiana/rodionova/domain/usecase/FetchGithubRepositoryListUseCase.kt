@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class FetchGithubRepositoryListUseCase(private val githubRepository: GithubListRepository) {
 
-    suspend operator fun invoke(): Flow<List<GithubRepositoryListDomainItem>> =
+    operator fun invoke(): Flow<List<GithubRepositoryListDomainItem>> =
         githubRepository.getGithubAndroidRepositories()
 }

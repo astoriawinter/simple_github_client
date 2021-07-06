@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class FetchGithubRepositoryTreeUseCase(private val githubRepository: GithubDetailedRepository) {
 
-    suspend operator fun invoke(
+    operator fun invoke(
         name: String,
         repo: String
     ): Flow<List<GithubRepositoryTreeDomainItem>> =
