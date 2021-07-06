@@ -1,8 +1,8 @@
 package com.tatiana.rodionova.data.mapper
 
-import com.tatiana.rodionova.data.model.GithubItem
-import com.tatiana.rodionova.data.model.RepositoryTypeModel
-import com.tatiana.rodionova.data.model.Tree
+import com.tatiana.rodionova.data.model.dto.GithubItem
+import com.tatiana.rodionova.data.model.dto.RepositoryTypeModel
+import com.tatiana.rodionova.data.model.dto.Tree
 import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.domain.model.GithubRepositoryTreeDomainItem
 import com.tatiana.rodionova.domain.model.RepositoryTypeDomain
