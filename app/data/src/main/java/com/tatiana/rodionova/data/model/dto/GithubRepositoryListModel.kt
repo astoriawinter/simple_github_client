@@ -1,4 +1,4 @@
-package com.tatiana.rodionova.data.model
+package com.tatiana.rodionova.data.model.dto
 
 data class GithubRepositoryModel(
     val incomplete_results: Boolean,
