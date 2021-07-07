@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryListUseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -11,6 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepositoryListViewModel @Inject constructor(
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val fetchGithubRepositoryListUseCase: FetchGithubRepositoryListUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State>(State.Loading)
@@ -23,7 +26,7 @@ class RepositoryListViewModel @Inject constructor(
     }
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             try {
                 fetchGithubRepositoryListUseCase.invoke().collect { githubItemList ->
                     _state.value = State.DataLoaded(githubItemList)

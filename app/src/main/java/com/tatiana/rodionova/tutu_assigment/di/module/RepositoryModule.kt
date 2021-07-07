@@ -22,7 +22,13 @@ class RepositoryModule {
         githubItemDao: GithubItemDao,
         networkHelper: NetworkHelper
     ): GithubListRepository =
-        GithubRepositoryListImplementation(key, sortBy, githubService, githubItemDao, networkHelper)
+        GithubRepositoryListImplementation(
+            key = key,
+            sortBy = sortBy,
+            githubService = githubService,
+            githubItemDao = githubItemDao,
+            networkHelper = networkHelper
+        )
 
     @Provides
     fun providesGithubDetailedRepository(
@@ -30,5 +36,9 @@ class RepositoryModule {
         githubTreeItemDao: TreeItemDao,
         networkHelper: NetworkHelper
     ): GithubDetailedRepository =
-        GithubRepositoryDetailedImplementation(githubService, githubTreeItemDao, networkHelper)
+        GithubRepositoryDetailedImplementation(
+            githubService = githubService,
+            githubTreeItemDao = githubTreeItemDao,
+            networkHelper = networkHelper
+        )
 }
