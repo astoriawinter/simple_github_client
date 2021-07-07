@@ -6,6 +6,8 @@ import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryListUseCase
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryTreeUseCase
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 @Module(includes = [RepositoryModule::class])
 class UsecaseModule {
@@ -22,4 +24,8 @@ class UsecaseModule {
     ): FetchGithubRepositoryTreeUseCase {
         return FetchGithubRepositoryTreeUseCase(githubRepository)
     }
+
+    @Provides
+    fun providesDispatcher(): CoroutineDispatcher =
+        Dispatchers.IO
 }
