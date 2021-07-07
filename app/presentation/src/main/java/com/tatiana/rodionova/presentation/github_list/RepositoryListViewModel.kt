@@ -6,18 +6,16 @@ import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryListUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepositoryListViewModel @Inject constructor(
-    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val fetchGithubRepositoryListUseCase: FetchGithubRepositoryListUseCase
 ) : ViewModel() {
-    private val _state = MutableStateFlow<State>(State.Loading)
-    val state: StateFlow<State> = _state
+    private val _state = MutableSharedFlow<State>(replay = 1)
+    val state: SharedFlow<State> = _state
 
     sealed interface State {
         object Loading : State
@@ -25,15 +23,21 @@ class RepositoryListViewModel @Inject constructor(
         data class DataLoaded(val githubItemList: List<GithubRepositoryListDomainItem>) : State
     }
 
-    init {
+    fun loadRepositoryList() {
         viewModelScope.launch(dispatcher) {
+            _state.emit(State.Loading)
+
             try {
                 fetchGithubRepositoryListUseCase.invoke().collect { githubItemList ->
-                    _state.value = State.DataLoaded(githubItemList)
+                    _state.emit(State.DataLoaded(githubItemList))
                 }
             } catch (e: Throwable) {
-                _state.value = State.Error(e)
+                _state.emit(State.Error(e))
             }
         }
+    }
+
+    init {
+        loadRepositoryList()
     }
 }
