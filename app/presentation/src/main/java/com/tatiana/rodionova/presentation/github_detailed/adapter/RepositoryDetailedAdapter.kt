@@ -38,12 +38,11 @@ class RepositoryDetailedAdapter : RecyclerView.Adapter<RepositoryDetailedViewHol
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RepositoryDetailedViewHolder =
-        RepositoryDetailedViewHolder(
-            ItemRepositoryTreeBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
+    ): RepositoryDetailedViewHolder {
+        val binding =
+            ItemRepositoryTreeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RepositoryDetailedViewHolder(binding)
+    }
 
     override fun onBindViewHolder(holder: RepositoryDetailedViewHolder, position: Int) {
         val item = treeList[position]
