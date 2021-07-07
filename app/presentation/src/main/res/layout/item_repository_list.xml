@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/stargazerIcon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <ImageView
+        android:id="@+id/colorIcon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="15dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_circle"
+        app:layout_constraintBottom_toBottomOf="@id/stargazerIcon"
+        app:layout_constraintStart_toEndOf="@id/stargazerCount"
+        app:layout_constraintTop_toTopOf="@id/stargazerIcon" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="Description" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="open-android/Android" />
+
+    <TextView
+        android:id="@+id/stargazerCount"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/stargazerIcon"
+        app:layout_constraintStart_toEndOf="@id/stargazerIcon"
+        app:layout_constraintTop_toTopOf="@id/stargazerIcon"
+        tools:text="3.1k" />
+
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/colorIcon"
+        app:layout_constraintStart_toEndOf="@id/colorIcon"
+        app:layout_constraintTop_toTopOf="@id/colorIcon"
+        tools:text="Kotlin" />
+
+    <TextView
+        android:id="@+id/lastUpdated"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@id/language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/language"
+        app:layout_constraintTop_toTopOf="@id/language"
+        tools:text="Updated 12 hours ago" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/languageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="language, colorIcon" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/stargazerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="stargazerCount, stargazerIcon" />
+</androidx.constraintlayout.widget.ConstraintLayout>

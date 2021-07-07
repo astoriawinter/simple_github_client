@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/repositoryListFragment">
+
+    <fragment
+        android:id="@+id/repositoryListFragment"
+        android:name="com.tatiana.rodionova.presentation.github_list.RepositoryListFragment"
+        android:label="RepositoryListFragment" >
+        <action
+            android:id="@+id/goToDetailedScreen"
+            app:destination="@id/repositoryDetailedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repositoryDetailedFragment"
+        android:name="com.tatiana.rodionova.presentation.github_detailed.RepositoryDetailedFragment"
+        android:label="RepositoryDetailedFragment" >
+        <argument
+            android:name="item"
+            app:argType="com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem" />
+    </fragment>
+</navigation>
