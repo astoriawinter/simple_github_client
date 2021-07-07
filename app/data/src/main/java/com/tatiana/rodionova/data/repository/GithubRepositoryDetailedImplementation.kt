@@ -64,9 +64,10 @@ class GithubRepositoryDetailedImplementation(
                 if (isConnected) {
                     getTreeListFromApiAndUpdateDB(name, repo)
                 } else {
-                    githubTreeItemDao.getTreeListByNameAndRepo(name).map { treeList ->
-                        treeList.map(TreeItemEntity::toDomain)
-                    }
+                    githubTreeItemDao.getTreeListByNameAndRepo(getFullRepositoryName(name, repo))
+                        .map { treeList ->
+                            treeList.map(TreeItemEntity::toDomain)
+                        }
                 }
             }.flowOn(dispatcher)
 }

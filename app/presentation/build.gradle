@@ -53,4 +53,5 @@ dependencies {
     implementation appDependencies.daggerAndroid
     implementation appDependencies.daggerAndroidSupport
     kapt appDependencies.daggerAndroidProcessor
+    implementation appDependencies.swipeRefresh
 }

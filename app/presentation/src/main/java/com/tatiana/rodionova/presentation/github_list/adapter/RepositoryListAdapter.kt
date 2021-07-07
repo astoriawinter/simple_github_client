@@ -40,12 +40,10 @@ class RepositoryListAdapter(
     }
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryListViewHolder =
-        RepositoryListViewHolder(
-            ItemRepositoryListBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryListViewHolder {
+        val binding = ItemRepositoryListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RepositoryListViewHolder(binding)
+    }
 
     override fun onBindViewHolder(holder: RepositoryListViewHolder, position: Int) {
         val item = githubItemList[position]

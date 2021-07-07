@@ -41,6 +41,10 @@ class RepositoryListFragment : DaggerAppCompatDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
 
+        viewBinding?.swipeRefresh?.setOnRefreshListener {
+            viewModel.loadRepositoryList()
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state ->
                 when (state) {
@@ -59,17 +63,28 @@ class RepositoryListFragment : DaggerAppCompatDialogFragment() {
     }
 
     private fun renderLoadingState() {
-        viewBinding?.loader?.visibility = View.VISIBLE
+        viewBinding?.run {
+            if (!swipeRefresh.isRefreshing) {
+                loader.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun hideLoaders() {
+        viewBinding?.run {
+            loader.visibility = View.GONE
+            swipeRefresh.isRefreshing = false
+        }
     }
 
     private fun renderLoadedData(githubItemList: List<GithubRepositoryListDomainItem>) {
-        viewBinding?.loader?.visibility = View.GONE
+        hideLoaders()
         repositoryListAdapter?.githubItemList = githubItemList
     }
 
     private fun renderErrorState(error: Throwable) {
+        hideLoaders()
         Toast.makeText(requireContext(), error.message, Toast.LENGTH_LONG).show()
-        viewBinding?.loader?.visibility = View.GONE
     }
 
     private fun openDetailedScreen(item: GithubRepositoryListDomainItem) {
