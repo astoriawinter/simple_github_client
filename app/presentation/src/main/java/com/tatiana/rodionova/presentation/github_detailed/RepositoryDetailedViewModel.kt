@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.tatiana.rodionova.domain.model.GithubRepositoryTreeDomainItem
 import com.tatiana.rodionova.domain.model.getNameAndRepository
 import com.tatiana.rodionova.domain.usecase.FetchGithubRepositoryTreeUseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -12,6 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepositoryDetailedViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val fetchGithubRepositoryTreeUseCase: FetchGithubRepositoryTreeUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State>(State.Loading)
@@ -24,7 +27,7 @@ class RepositoryDetailedViewModel @Inject constructor(
     }
 
     fun getRepositoryDetails(fullName: String) =
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             val (name, repo) = fullName.getNameAndRepository()
 
             loadTreeData(name, repo)
