@@ -21,6 +21,7 @@ buildscript {
         nav_version = "2.3.4"
         lifecycle_version = "2.3.1"
         dagger = "2.37"
+        swipeRefresh = "1.1.0"
 
         gson_version = "2.8.7"
         room_version = "2.3.0"
@@ -53,7 +54,8 @@ buildscript {
                 daggerCompiler        : "com.google.dagger:dagger-compiler:$dagger",
                 daggerAndroid         : "com.google.dagger:dagger-android:$dagger",
                 daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$dagger",
-                daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger"
+                daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger",
+                swipeRefresh          : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefresh"
         ]
 
         dataDependencies = [
@@ -74,18 +76,18 @@ buildscript {
         ]
 
         testDependencies = [
-                jUnit                 : "junit:junit:$jUnit_version",
-                truth                 : "com.google.truth:truth:$truth_version",
-                coroutinesTest        : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest_version",
+                jUnit            : "junit:junit:$jUnit_version",
+                truth            : "com.google.truth:truth:$truth_version",
+                coroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest_version",
 
                 //Android tests libs
-                androidJUnit          : "androidx.test.ext:junit-ktx:$androidJUnit",
-                androidTestRules      : "androidx.test:rules:$androidXTest",
-                androidTestRunner     : "androidx.test:runner:$androidXTest",
-                mockk                 : "io.mockk:mockk:$mockk",
-                assertj               : "org.assertj:assertj-core:$assertj",
-                turbine               : "app.cash.turbine:turbine:$turbine",
-                kaspresso             : "com.kaspersky.android-components:kaspresso:$kaspresso"
+                androidJUnit     : "androidx.test.ext:junit-ktx:$androidJUnit",
+                androidTestRules : "androidx.test:rules:$androidXTest",
+                androidTestRunner: "androidx.test:runner:$androidXTest",
+                mockk            : "io.mockk:mockk:$mockk",
+                assertj          : "org.assertj:assertj-core:$assertj",
+                turbine          : "app.cash.turbine:turbine:$turbine",
+                kaspresso        : "com.kaspersky.android-components:kaspresso:$kaspresso"
         ]
     }
 
