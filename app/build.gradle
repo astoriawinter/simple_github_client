@@ -53,4 +53,14 @@ dependencies {
     api dataDependencies.roomRuntime
     kapt dataDependencies.roomCompiler
     api dataDependencies.roomKtx
+    testImplementation testDependencies.androidJUnit
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.androidTestRules
+    testImplementation testDependencies.androidTestRunner
+    testImplementation testDependencies.turbine
+    testImplementation testDependencies.assertj
+    androidTestImplementation testDependencies.kaspresso
+    androidTestImplementation testDependencies.androidTestRules
+    androidTestImplementation testDependencies.androidJUnit
 }
