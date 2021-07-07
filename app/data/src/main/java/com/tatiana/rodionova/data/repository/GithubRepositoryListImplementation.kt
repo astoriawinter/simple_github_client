@@ -9,10 +9,12 @@ import com.tatiana.rodionova.data.model.dto.GithubItem
 import com.tatiana.rodionova.data.model.entity.GithubItemEntity
 import com.tatiana.rodionova.domain.model.GithubRepositoryListDomainItem
 import com.tatiana.rodionova.domain.repository.GithubListRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class GithubRepositoryListImplementation(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val key: String,
     private val sortBy: String,
     private val githubService: GithubService,
@@ -42,7 +44,7 @@ class GithubRepositoryListImplementation(
         }
 
     private fun getGithubListFromApiAndUpdateDBAsFlow(): Flow<List<GithubRepositoryListDomainItem>> =
-        getGithubListFromApiAndUpdateDB().flowOn(Dispatchers.IO)
+        getGithubListFromApiAndUpdateDB().flowOn(dispatcher)
 
     private fun getGithubListFromDBOrUpdateFromApi(): Flow<List<GithubRepositoryListDomainItem>> =
         networkHelper.isNetworkConnected
@@ -54,5 +56,5 @@ class GithubRepositoryListImplementation(
                         treeList.map(GithubItemEntity::toDomain)
                     }
                 }
-            }.flowOn(Dispatchers.IO)
+            }.flowOn(dispatcher)
 }

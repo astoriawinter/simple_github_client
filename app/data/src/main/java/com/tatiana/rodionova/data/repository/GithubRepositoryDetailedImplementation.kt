@@ -10,10 +10,12 @@ import com.tatiana.rodionova.data.model.entity.TreeItemEntity
 import com.tatiana.rodionova.domain.model.GithubRepositoryTreeDomainItem
 import com.tatiana.rodionova.domain.model.getFullRepositoryName
 import com.tatiana.rodionova.domain.repository.GithubDetailedRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class GithubRepositoryDetailedImplementation(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val githubService: GithubService,
     private val githubTreeItemDao: TreeItemDao,
     private val networkHelper: NetworkHelper
@@ -51,7 +53,7 @@ class GithubRepositoryDetailedImplementation(
         name: String,
         repo: String
     ): Flow<List<GithubRepositoryTreeDomainItem>> =
-        getTreeListFromApiAndUpdateDB(name, repo).flowOn(Dispatchers.IO)
+        getTreeListFromApiAndUpdateDB(name, repo).flowOn(dispatcher)
 
     private fun getTreeListFromDBAndUpdateFromApi(
         name: String,
@@ -66,5 +68,5 @@ class GithubRepositoryDetailedImplementation(
                         treeList.map(TreeItemEntity::toDomain)
                     }
                 }
-            }.flowOn(Dispatchers.IO)
+            }.flowOn(dispatcher)
 }
