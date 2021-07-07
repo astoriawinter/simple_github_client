@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class GithubRepositoryTreeDomainItem(
+data class GithubRepositoryTreeDomainItem(
     val path: String,
     val type: RepositoryTypeDomain,
     val sha: String
